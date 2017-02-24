@@ -26,13 +26,13 @@ func TestDecision(t *testing.T) {
 		},
 	}
 
-	res, err := dt.Evaluate(map[string]interface{}{
+	result, err := dt.Evaluate(map[string]interface{}{
 		"age":    20,
 		"income": 10,
 	})
 	assert.NoError(t, err, "expected Evaluate() to not err")
-	assert.Equal(t, res.Rules[0].Outcome, dt.Rules[0].Outcome)
-	assert.Nil(t, res.Rules[1].Outcome)
+	assert.Equal(t, result.Rules[0].Outcome, dt.Rules[0].Outcome)
+	assert.Nil(t, result.Rules[1].Outcome)
 }
 
 func TestDecisionBreakOnMatch(t *testing.T) {
@@ -54,12 +54,12 @@ func TestDecisionBreakOnMatch(t *testing.T) {
 		},
 	}
 
-	res, err := dt.Evaluate(map[string]interface{}{
+	result, err := dt.Evaluate(map[string]interface{}{
 		"age":    20,
 		"income": 10,
 	})
 	assert.NoError(t, err, "expected Evaluate() to not err")
-	assert.Equal(t, res.FinalDecision, dt.Rules[0].Outcome)
+	assert.Equal(t, result.FinalDecision, dt.Rules[0].Outcome)
 }
 
 func TestDecisionNotBreakOnMatch(t *testing.T) {
@@ -81,12 +81,12 @@ func TestDecisionNotBreakOnMatch(t *testing.T) {
 		},
 	}
 
-	res, err := dt.Evaluate(map[string]interface{}{
+	result, err := dt.Evaluate(map[string]interface{}{
 		"age":    20,
 		"income": 10,
 	})
 	assert.NoError(t, err, "expected Evaluate() to not err")
-	assert.Equal(t, res.FinalDecision, dt.Rules[1].Outcome)
+	assert.Equal(t, result.FinalDecision, dt.Rules[1].Outcome)
 }
 
 func TestDecisionRndEvaluates(t *testing.T) {
@@ -107,9 +107,9 @@ func TestDecisionRndEvaluates(t *testing.T) {
 		},
 	}
 
-	res, err := dt.Evaluate(map[string]interface{}{})
+	result, err := dt.Evaluate(map[string]interface{}{})
 	assert.NoError(t, err, "expected Evaluate() to not err")
-	assert.Equal(t, res.FinalDecision, dt.Rules[0].Outcome)
+	assert.Equal(t, result.FinalDecision, dt.Rules[0].Outcome)
 }
 
 func TestDecisionSetsRulesNilWhenNotRun(t *testing.T) {
@@ -133,10 +133,10 @@ func TestDecisionSetsRulesNilWhenNotRun(t *testing.T) {
 		},
 	}
 
-	res, err := dt.Evaluate(map[string]interface{}{
+	result, err := dt.Evaluate(map[string]interface{}{
 		"num": 10,
 	})
 	assert.NoError(t, err, "expected Evaluate() to not err")
-	assert.Nil(t, res.Rules[1].Outcome)
-	assert.Nil(t, res.Rules[2].Outcome)
+	assert.Nil(t, result.Rules[1].Outcome)
+	assert.Nil(t, result.Rules[2].Outcome)
 }

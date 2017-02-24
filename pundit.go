@@ -66,7 +66,7 @@ func (e *DecisionTable) Evaluate(input map[string]interface{}) (*ResultSet, erro
 	finished := false
 	for i, r := range e.Rules {
 		rs.Rules[i] = r
-		// clear the outcome to be determined below
+		// clear the outcome to be determined below. Nil is the initial value of a rule that hasn't run
 		rs.Rules[i].Outcome = nil
 
 		// e.BreakOnMatch is true, and a previous rule already matched, skip evaluation
